@@ -1,0 +1,10 @@
+<brokerServers>
+    <broker name = "EdgeBroker1">
+        <tcp_address>192.168.0.107</tcp_address>
+        <port_number>61613</port_number>
+    </broker>
+    <broker>
+        <tcp_address>192.168.0.100</tcp_address>
+        <port_number></port_number>
+    </broker>
+</brokerServers>

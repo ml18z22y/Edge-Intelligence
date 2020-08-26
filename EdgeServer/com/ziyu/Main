@@ -1,0 +1,20 @@
+from xml.dom.minidom import parse
+import com.ziyu.EdgeServerThread as ET
+
+
+def load_file():
+    dom_tree = parse("../../config/brokerServer.XML")
+    edge_broker = dom_tree.getElementsByTagName("broker")[0]
+    cloud_broker = dom_tree.getElementsByTagName("broker")[1]
+    edge_address = edge_broker.getElementsByTagName("tcp_address")[0].firstChild.data
+    cloud_address = cloud_broker.getElementsByTagName("tcp_address")[0].firstChild.data
+    port_number = edge_broker.getElementsByTagName("port_number")[0].firstChild.data
+
+    return edge_address, port_number, cloud_address
+
+
+edge_address, port_number, cloud_address = load_file()
+number_of_edge_node = int(input("please input the number of Edge nodes: "))
+for i in range(number_of_edge_node):
+    node_thread = ET.EdgeServerThread("EdgeServer" + str(i + 1), edge_address, cloud_address, int(port_number))
+    node_thread.start()
